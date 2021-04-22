@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script type="javascript" src="app.js" defer></script>
+    <script src="app.js" defer></script>
     <title>Sorting Visualization</title>
 </head>
 
@@ -15,13 +15,17 @@
         <div class="selection_group">
             <div class="algorithms">
                 <p class="algorithms">Algorithm: </p>
-                <select class="selectAlgorithm selection ">
+                <select class="selectAlgorithm">
                     <option value="bubble_sort">Bubble Sort</option>
+                    <option value="merge_sort">Merge Sort</option>
+                    <option value="insertion_sort">Insertion Sort</option>
+                    <option value="selection_sort">Selection Sort</option>
+                    <option value="heap_sort">Heap Sort</option>
                 </select>
             </div>
             <div class="speed">
                 <p>Speed: </p>
-                <select class="selectSpeed selection">
+                <select class="selectSpeed">
                     <option value="slow">Slow</option>
                     <option value="medium" selected="selected">Medium</option>
                     <option value="fast">Fast</option>
@@ -30,12 +34,12 @@
             </div>
         </div>
         <div class="actions">
-            <button onclick="() => {}">Generate Array</button>
-            <button onclick="() => {}">Sort</button>
+            <button onclick="generateArray()">Generate Array</button>
+            <button onclick="sort()">Sort</button>
         </div>
     </div>
     <div class="container">
-        <canvas class="canvas"></canvas>
+        <canvas class="canvas" height="500" width="1000"></canvas>
     </div>
 </body>
 
