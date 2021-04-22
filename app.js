@@ -28,7 +28,7 @@ function draw(colors = []) {
   for (let i = 0; i < data.length; i++) {
     ctx.beginPath();
     if (colors.includes(i)) {
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = "red";
     } else {
       ctx.fillStyle = "black";
     }
@@ -43,33 +43,36 @@ function draw(colors = []) {
   }
 }
 
-function sort() {
+async function sort() {
   const elem = document.getElementsByClassName("selectAlgorithm")[0];
+
+  if (data.length == 0) {
+    alert("You have to generate an array first\nor Array is already sorted.");
+    return;
+  }
 
   switch (elem.value) {
     case "bubble_sort":
-      console.log("Bubble");
-      bubbleSort();
-      break;
-    case "merge_sort":
-      console.log("Merge");
+      await bubbleSort();
       break;
     case "insertion_sort":
-      insertionSort();
+      await insertionSort();
       break;
     case "selection_sort":
-      selectionSort();
+      await selectionSort();
       break;
     case "heap_sort":
-      heapSort();
+      await heapSort();
       break;
     case "quick_sort":
-      quickSort(0, data.length - 1);
+      await quickSort(0, data.length - 1);
       break;
     default:
       console.error("Nothing working");
       break;
   }
+
+  data = [];
 }
 
 async function bubbleSort() {

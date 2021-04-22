@@ -4,22 +4,7 @@
   margin: 0;
 }
 
-select {
-  background-color: brown;
-  border: none;
-  margin: 10px;
-}
-
-button {
-  background-color: transparent;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  font-size: 16px;
-  border: none;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
+/* The Top Bar with all controls */
 .actions_bar {
   display: flex;
   margin: 10px;
@@ -27,9 +12,9 @@ button {
   justify-content: space-between;
   background-color: brown;
   border-radius: 10px;
-  max-width: 100%;
 }
 
+/* Children of Top Bar being */
 .actions_bar * {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -40,10 +25,12 @@ button {
   color: white;
 }
 
+/* */
+
 .selection_group {
   display: flex;
   padding: 10px;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 .actions {
@@ -64,4 +51,24 @@ button {
   background-color: lightgrey;
   border-radius: 10px;
   max-width: 95%;
+}
+
+select {
+  background-color: brown;
+  border: none;
+}
+
+button {
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+}
+
+@media screen and (max-width: 768px) {
+  .actions_bar {
+    flex-direction: column;
+  }
 }
