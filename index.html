@@ -12,20 +12,22 @@
 
 <body>
     <div class="actions_bar">
-        <div class="algorithms">
-            <p class="algorithms">Algorithm: </p>
-            <select class="selectAlgorithm">
-                <option value="bubble_sort">Bubble Sort</option>
-            </select>
-        </div>
-        <div class="speed">
-            <p>Speed: </p>
-            <select name="selectSpeed" id="selectSpeed">
-                <option value="slow">Slow</option>
-                <option value="medium" selected="selected">Medium</option>
-                <option value="fast">Fast</option>
-                <option value="very_fast">Very Fast</option>
-            </select>
+        <div class="selection_group">
+            <div class="algorithms">
+                <p class="algorithms">Algorithm: </p>
+                <select class="selectAlgorithm selection ">
+                    <option value="bubble_sort">Bubble Sort</option>
+                </select>
+            </div>
+            <div class="speed">
+                <p>Speed: </p>
+                <select class="selectSpeed selection">
+                    <option value="slow">Slow</option>
+                    <option value="medium" selected="selected">Medium</option>
+                    <option value="fast">Fast</option>
+                    <option value="very_fast">Very Fast</option>
+                </select>
+            </div>
         </div>
         <div class="actions">
             <button onclick="() => {}">Generate Array</button>
@@ -33,7 +35,7 @@
         </div>
     </div>
     <div class="container">
-        </canvas id="canvas" height="500" width="100%">
+        <canvas class="canvas"></canvas>
     </div>
 </body>
 
