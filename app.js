@@ -15,14 +15,6 @@ function generateArray() {
   draw();
 }
 
-/**
- * This function generates a random number
- * @returns A random number between 10 and 450
- */
-function getRandomNumber() {
-  return Math.floor(Math.random() * 440 + 10);
-}
-
 function draw(colors = []) {
   const can = document.getElementsByClassName("canvas")[0];
   const ctx = can.getContext("2d");
@@ -52,8 +44,6 @@ function draw(colors = []) {
 }
 
 function sort() {
-  console.log("Sort called");
-
   const elem = document.getElementsByClassName("selectAlgorithm")[0];
 
   switch (elem.value) {
@@ -73,6 +63,9 @@ function sort() {
     case "heap_sort":
       heapSort();
       break;
+    case "quick_sort":
+      quickSort(0, data.length - 1);
+      break;
     default:
       console.error("Nothing working");
       break;
@@ -80,19 +73,21 @@ function sort() {
 }
 
 async function bubbleSort() {
-  console.log("bubble called");
+  const time = speed() * 1000;
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data.length - i - 1; j++) {
       if (data[j] > data[j + 1]) {
         swap(j, j + 1);
         draw([j, j + 1]);
-        await sleep(speed() * 100);
+        await sleep(time);
       }
     }
   }
+  draw();
 }
 
 async function insertionSort() {
+  const time = speed() * 1000;
   for (let i = 0; i < data.length; i++) {
     let key = data[i];
     let j = i - 1;
@@ -102,7 +97,7 @@ async function insertionSort() {
       j--;
 
       draw([j, j + 1]);
-      await sleep(speed() * 1000);
+      await sleep(time);
     }
     data[j + 1] = key;
   }
@@ -110,6 +105,7 @@ async function insertionSort() {
 }
 
 async function selectionSort() {
+  const time = speed() * 1000;
   for (let i = 0; i < data.length - 1; i++) {
     var min = i;
 
@@ -120,14 +116,14 @@ async function selectionSort() {
     if (min != i) {
       swap(i, min);
       draw([i, min]);
-      await sleep(speed() * 1000);
+      await sleep(time);
     }
   }
-
   draw();
 }
 
 async function heapSort() {
+  const time = speed() * 1000;
   for (let i = data.length / 2 - 1; i >= 0; i--) {
     await heapify(data.length, i);
   }
@@ -135,14 +131,45 @@ async function heapSort() {
   for (let i = data.length - 1; i > 0; i--) {
     swap(0, i);
     draw([0, i]);
-    await sleep(speed() * 1000);
+    await sleep(time);
     await heapify(i, 0);
   }
 
   draw();
 }
 
+async function quickSort(low, high) {
+  if (low >= high) {
+    return;
+  }
+
+  let index = await partition(low, high);
+
+  await quickSort(low, index - 1);
+  await quickSort(index + 1, high);
+
+  draw();
+}
+
+async function partition(low, high) {
+  const time = speed() * 1000;
+  const pivotValue = data[high];
+  let piv = low;
+  for (let i = low; i < high; i++) {
+    if (data[i] < pivotValue) {
+      swap(i, piv);
+      await sleep(time);
+      draw([i, piv]);
+      piv++;
+    }
+  }
+  swap(piv, high);
+  draw([piv, high]);
+  return piv;
+}
+
 async function heapify(n, i) {
+  const time = speed() * 1000;
   let max = i;
   let left = 2 * i + 1;
   let right = 2 * i + 2;
@@ -154,24 +181,40 @@ async function heapify(n, i) {
   if (max != i) {
     swap(i, max);
     draw([i, max]);
-    await sleep(speed() * 1000);
+    await sleep(time);
 
     await heapify(n, max);
   }
 }
 
+/**
+ * A small helper function which helps animating the sorting algorithms
+ * @param {*} ms How long the function should sleep for in ms
+ * @returns a new Promise
+ */
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/**
+ * Swaps two values from the main array
+ * @param {*} a Index 1
+ * @param {*} b Index 2
+ */
 function swap(a, b) {
   const temp = data[a];
   data[a] = data[b];
   data[b] = temp;
 }
 
+/**
+ * This is a function which determines the speed factor for the sorting speed
+ * @returns speed factor for the sorting Speed
+ */
 function speed() {
-  switch (document.getElementsByClassName("speed")[0].value) {
+  const elem = document.getElementsByClassName("selectSpeed")[0];
+  console.log(elem.value);
+  switch (elem.value) {
     case "slow":
       return 1;
     case "medium":
@@ -181,6 +224,15 @@ function speed() {
     case "very_fast":
       return 0.001;
     default:
+      console.log("default");
       return 0.5;
   }
+}
+
+/**
+ * This function generates a random number
+ * @returns A random number between 10 and 450
+ */
+function getRandomNumber() {
+  return Math.floor(Math.random() * 440 + 10);
 }

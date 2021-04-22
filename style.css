@@ -23,9 +23,11 @@ button {
 .actions_bar {
   display: flex;
   margin: 10px;
+  justify-self: center;
   justify-content: space-between;
   background-color: brown;
   border-radius: 10px;
+  max-width: 100%;
 }
 
 .actions_bar * {
@@ -54,10 +56,12 @@ button {
   margin: 10px;
   display: flex;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .canvas {
   padding: 10px;
   background-color: lightgrey;
   border-radius: 10px;
+  max-width: 95%;
 }
