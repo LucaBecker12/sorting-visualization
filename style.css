@@ -33,6 +33,10 @@
   margin-left: 10px;
 }
 
+.selection_group * {
+  margin-left: 20px;
+}
+
 .actions {
   display: flex;
   align-items: center;
@@ -70,5 +74,8 @@ button {
 @media screen and (max-width: 768px) {
   .actions_bar {
     flex-direction: column;
+  }
+  .selection_group * {
+    margin-left: 0px;
   }
 }
